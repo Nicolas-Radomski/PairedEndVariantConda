@@ -48,11 +48,10 @@ def emptydir_warning_success(directory):
 		output = wd + '/' + directory
 		print("#### Results are successfully produced in {} and can be found in {}" .format(directory, output))
 
-# function returning an warning message and exiting from the systhem if a file does not exist (e.g. usually a failed previous step of the workflow), or a successfull message if this last exist
+# function returning an warning message from the systhem if a file does not exist (e.g. usually a failed previous step of the workflow), or a successfull message if this last exist
 def absentefile_warning_success(expectedfile):
 	if os.path.exists(expectedfile) is False:
 		print("#### WARNING: The expected file does not exist in %s" %expectedfile)
-		sys.exit("#### Please, check standard error (stderr.log) and output (stdout.log) before lunching" %expectedfile)
 	else:
 		wd = os.getcwd()
 		output = wd + '/' + expectedfile

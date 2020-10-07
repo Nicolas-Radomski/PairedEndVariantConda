@@ -19,7 +19,6 @@
 #### Execute /global/conda/envs/PairedEndVariantCalling/bin/samtools faidx /global/bio/projets/GAMeR/Nicolas-Radomski/PairedEndVariant/VariantCalling/1_reference/Enteritidis_P125109.fasta
 #### Execute /global/conda/envs/PairedEndVariantCalling/bin/picard CreateSequenceDictionary REFERENCE=/global/bio/projets/GAMeR/Nicolas-Radomski/PairedEndVariant/VariantCalling/1_reference/Enteritidis_P125109.fasta OUTPUT=/global/bio/projets/GAMeR/Nicolas-Radomski/PairedEndVariant/VariantCalling/1_reference/Enteritidis_P125109.dict
 #### Execute /global/conda/envs/PairedEndVariantCalling/bin/bbnorm.sh in=/global/bio/projets/GAMeR/Nicolas-Radomski/PairedEndVariant/data/ERR3997409_R1.fastq.gz in2=/global/bio/projets/GAMeR/Nicolas-Radomski/PairedEndVariant/data/ERR3997409_R2.fastq.gz out=/global/bio/projets/GAMeR/Nicolas-Radomski/PairedEndVariant/VariantCalling/2_normalization/ERR3997409_R1_N.fastq.gz out2=/global/bio/projets/GAMeR/Nicolas-Radomski/PairedEndVariant/VariantCalling/2_normalization/ERR3997409_R2_N.fastq.gz target=100 threads=40
-#### Results are successfully produced in VariantCalling/2_normalization and can be found in /global/bio/projets/GAMeR/Nicolas-Radomski/PairedEndVariant/VariantCalling/2_normalization
 #### Execute /global/conda/envs/PairedEndVariantCalling/bin/trimmomatic PE -threads 40 -phred33 /global/bio/projets/GAMeR/Nicolas-Radomski/PairedEndVariant/VariantCalling/2_normalization/ERR3997409_R1_N.fastq.gz /global/bio/projets/GAMeR/Nicolas-Radomski/PairedEndVariant/VariantCalling/2_normalization/ERR3997409_R2_N.fastq.gz /global/bio/projets/GAMeR/Nicolas-Radomski/PairedEndVariant/VariantCalling/3_trimming/ERR3997409_R1_P.fastq.gz /global/bio/projets/GAMeR/Nicolas-Radomski/PairedEndVariant/VariantCalling/3_trimming/ERR3997409_R1_UP.fastq.gz /global/bio/projets/GAMeR/Nicolas-Radomski/PairedEndVariant/VariantCalling/3_trimming/ERR3997409_R2_P.fastq.gz /global/bio/projets/GAMeR/Nicolas-Radomski/PairedEndVariant/VariantCalling/3_trimming/ERR3997409_R2_UP.fastq.gz ILLUMINACLIP:/global/bio/projets/GAMeR/Nicolas-Radomski/PairedEndVariant/data/NexteraPE-PE.fa:2:30:10 LEADING:3 TRAILING:3 SLIDINGWINDOW:4:15 MINLEN:36
 #### Execute /global/conda/envs/PairedEndVariantCalling/bin/bwa mem -t 40 -K 10000000 /global/bio/projets/GAMeR/Nicolas-Radomski/PairedEndVariant/VariantCalling/1_reference/Enteritidis_P125109.fasta /global/bio/projets/GAMeR/Nicolas-Radomski/PairedEndVariant/VariantCalling/3_trimming/ERR3997409_R1_P.fastq.gz /global/bio/projets/GAMeR/Nicolas-Radomski/PairedEndVariant/VariantCalling/3_trimming/ERR3997409_R2_P.fastq.gz > /global/bio/projets/GAMeR/Nicolas-Radomski/PairedEndVariant/VariantCalling/4_mapping/ERR3997409.sam
 #### Execute /global/conda/envs/PairedEndVariantCalling/bin/picard SortSam -I /global/bio/projets/GAMeR/Nicolas-Radomski/PairedEndVariant/VariantCalling/4_mapping/ERR3997409.sam -O /global/bio/projets/GAMeR/Nicolas-Radomski/PairedEndVariant/VariantCalling/4_mapping/ERR3997409.sorted.bam --SORT_ORDER coordinate --VALIDATION_STRINGENCY LENIENT --CREATE_INDEX true
@@ -29,7 +28,6 @@
 #### Execute /global/conda/envs/PairedEndVariantCalling/bin/samtools depth /global/bio/projets/GAMeR/Nicolas-Radomski/PairedEndVariant/VariantCalling/4_mapping/ERR3997409.dedupped.bam |  awk '{sum+=$3; sumsq+=$3*$3} END { print "Average Depth Coverage (X) =",sum/NR; print "Standard Deviation Depth Coverage (X) =",sqrt(sumsq/NR - (sum/NR)**2)}' > /global/bio/projets/GAMeR/Nicolas-Radomski/PairedEndVariant/VariantCalling/6_quality/ERR3997409.bam.depth
 #### Execute /global/conda/envs/PairedEndVariantCalling/bin/samtools coverage /global/bio/projets/GAMeR/Nicolas-Radomski/PairedEndVariant/VariantCalling/4_mapping/ERR3997409.dedupped.bam > /global/bio/projets/GAMeR/Nicolas-Radomski/PairedEndVariant/VariantCalling/6_quality/ERR3997409.bam.metrics
 #### Execute cat /global/bio/projets/GAMeR/Nicolas-Radomski/PairedEndVariant/VariantCalling/6_quality/ERR3997409.bam.metrics | awk ' { print $6 } ' | tr -d "\n" | sed 's@coverage@Breadth Coverage (%) = @' > /global/bio/projets/GAMeR/Nicolas-Radomski/PairedEndVariant/VariantCalling/6_quality/ERR3997409.bam.breadth
-#### Execute rm /global/bio/projets/GAMeR/Nicolas-Radomski/PairedEndVariant/VariantCalling/6_quality/ERR3997409.bam.metrics
 
 '''
 #### exemple of Bash command (sbatch_PairedEndVariantConda.sh) ####
@@ -174,9 +172,10 @@ def main():
 	# check IDs identity, then prepare output directories and run reference indexing
 	if R1id != R2id:
 		print("#### The forward (ID_R1.fastq.gz) and reverse (ID_R2.fastq.gz) reads do not match")
+		sys.exit("#### Please, check the format of the paired-end reads in {} and R2 in {}".format(R1, R2))
 	else:
 		print("#### The forward (ID_R1.fastq.gz) and reverse (ID_R2.fastq.gz) reads match")
-		# create an output directory called ID sample if it does not exist with the function nodir_makedir_warning of the module genomic.py
+		# create an output directory called by the run name if it does not exist with the function nodir_makedir_warning of the module genomic.py
 		genomic.nodir_makedir_warning(directory = r)
 		# create output directories if they do not exist with the function nodir_makedir_warning of the module genomic.py
 		genomic.nodir_makedir_warning(directory = r + '/' + '1_reference')
@@ -192,7 +191,11 @@ def main():
 		mappingoutput = wd + '/' + r + '/' + '4_mapping' + '/'
 		callingoutput = wd + '/' + r + '/' + '5_calling' + '/'
 		qualityoutput = wd + '/' + r + '/' + '6_quality' + '/'
-		# prepare and run reference indexing
+
+	# prepare and run reference indexing if the step 1_reference is not done (only of the first processed sample)
+	if len(os.listdir(referenceoutput)) > 0:
+		print("#### The reference genome is indexed in %s" %referenceoutput)
+	else:
 		cmdfasta = 'cp' + ' ' + RE + ' ' + referenceoutput
 		REname = os.path.basename(RE)
 		print("#### The reference is named %s" %REname)
@@ -210,8 +213,15 @@ def main():
 		print("#### Execute %s" %cmdindexpicard)
 		os.system(cmdindexpicard)
 
-	# check the step 1_reference, then return warning or successfull message with the function emptydir_warning_success of the module genomics.py
-	genomic.emptydir_warning_success(directory = r + '/' + '1_reference')
+	# check the absence of the reference index files of the step 1_reference, then return warning or successfull message with the function emptydir_warning_success of the module genomics.py
+	genomic.absentefile_warning_success(expectedfile = r + '/' + '1_reference' + '/' + R1id + '.dict')
+	genomic.absentefile_warning_success(expectedfile = r + '/' + '1_reference' + '/' + R1id + '.fasta')
+	genomic.absentefile_warning_success(expectedfile = r + '/' + '1_reference' + '/' + R1id + '.fasta.amb')
+	genomic.absentefile_warning_success(expectedfile = r + '/' + '1_reference' + '/' + R1id + '.fasta.ann')
+	genomic.absentefile_warning_success(expectedfile = r + '/' + '1_reference' + '/' + R1id + '.fasta.bwt')
+	genomic.absentefile_warning_success(expectedfile = r + '/' + '1_reference' + '/' + R1id + '.fasta.fai')
+	genomic.absentefile_warning_success(expectedfile = r + '/' + '1_reference' + '/' + R1id + '.fasta.pac')
+	genomic.absentefile_warning_success(expectedfile = r + '/' + '1_reference' + '/' + R1id + '.fasta.sa')
 
 	# prepare and run BBnorm
 	R1N = normalizationoutput + R1id + '_R1_N.fastq.gz'
@@ -220,8 +230,9 @@ def main():
 	print("#### Execute %s" %cmdBBnorm)
 	os.system(cmdBBnorm)
 
-	# check the step 2_normalization, then return warning or successfull message with the function emptydir_warning_success of the module genomics.py
-	genomic.emptydir_warning_success(directory = r + '/' + '2_normalization')
+	# check the absence of the _R1_N.fastq.gz and _R2_N.fastq.gz files of the step 2_normalization, then return warning or successfull message with the function emptydir_warning_success of the module genomics.py
+	genomic.absentefile_warning_success(expectedfile = r + '/' + '2_normalization' + '/' + R1id + '_R1_N.fastq.gz')
+	genomic.absentefile_warning_success(expectedfile = r + '/' + '2_normalization' + '/' + R1id + '_R2_N.fastq.gz')
 
 	# prepare and run Trimmomatic
 	R1P = trimmingoutput + R1id + '_R1_P.fastq.gz'
@@ -232,16 +243,18 @@ def main():
 	print("#### Execute %s" %cmdTrimmomatic)
 	os.system(cmdTrimmomatic)
 
-	# check the step 3_trimming, then return warning or successfull message with the function emptydir_warning_success of the module genomics.py
-	genomic.emptydir_warning_success(directory =  r + '/' + '3_trimming')
+	# check the absence of _R1_P.fastq.gz and _R2_P.fastq.gz files of the step 3_trimming, then return warning or successfull message with the function genomic.absentefile_warning_success of the module genomics.py
+	genomic.absentefile_warning_success(expectedfile = r + '/' + '3_trimming' + '/' + R1id + '_R1_P.fastq.gz')
+	genomic.absentefile_warning_success(expectedfile = r + '/' + '3_trimming' + '/' + R1id + '_R2_P.fastq.gz')
 
 	# prepare and run BWA
 	bwaoutput = mappingoutput + R1id + '.sam'
+	REname = os.path.basename(RE)
 	cmdBWA = BW + ' mem' + ' -t ' + str(t) + ' -K 10000000 ' + referenceoutput + REname + ' ' + R1P + ' ' + R2P + ' > ' + bwaoutput
 	print("#### Execute %s" %cmdBWA)
 	os.system(cmdBWA)
 
-	# check the absence of the .sam file of the step 4_mapping, then return warning or successfull message with the function emptydir_warning_success of the module genomics.py
+	# check the absence of .sam file of the step 4_mapping, then return warning or successfull message with the function absentefile_warning_success of the module genomics.py
 	genomic.absentefile_warning_success(expectedfile = r + '/' + '4_mapping' + '/' + R1id + '.sam')
 
 	# prepare and run SortSam from Picard
@@ -250,7 +263,7 @@ def main():
 	print("#### Execute %s" %cmdSortSam)
 	os.system(cmdSortSam)
 
-	# check the absence of the .sorted.bam file of the step 4_mapping, then return warning or successfull message with the function emptydir_warning_success of the module genomics.py
+	# check the absence of the .sorted.bam file of the step 4_mapping, then return warning or successfull message with the function absentefile_warning_success of the module genomics.py
 	genomic.absentefile_warning_success(expectedfile = r + '/' + '4_mapping' + '/' + R1id + '.sorted.bam')
 
 	# prepare and run "add or replace read group" (ARGG) from Picard
@@ -259,7 +272,7 @@ def main():
 	print("#### Execute %s" %cmdARRG)
 	os.system(cmdARRG)
 
-	# check the absence of the .ARGG.bam file of the step 4_mapping, then return warning or successfull message with the function emptydir_warning_success of the module genomics.py
+	# check the absence of the .ARGG.bam file of the step 4_mapping, then return warning or successfull message with the function absentefile_warning_success of the module genomics.py
 	genomic.absentefile_warning_success(expectedfile = r + '/' + '4_mapping' + '/' + R1id + '.ARRG.bam')
 
 	# prepare and run MarkDuplicates (MD) from Picard
@@ -269,7 +282,7 @@ def main():
 	print("#### Execute %s" %cmdMD)
 	os.system(cmdMD)
 
-	# check the absence of the .dedupped.bam file of the step 4_mapping, then return warning or successfull message with the function emptydir_warning_success of the module genomics.py
+	# check the absence of the .dedupped.bam file of the step 4_mapping, then return warning or successfull message with the function absentefile_warning_success of the module genomics.py
 	genomic.absentefile_warning_success(expectedfile = r + '/' + '4_mapping' + '/' + R1id + '.dedupped.bam')
 
 	# prepare and run HaplotypeCaller (HA) from GATK4
@@ -278,7 +291,7 @@ def main():
 	print("#### Execute %s" %cmdHC)
 	os.system(cmdHC)
 
-	# check the absence of the .g.vcf.gz file of the step 5_calling, then return warning or successfull message with the function emptydir_warning_success of the module genomics.py
+	# check the absence of the .g.vcf.gz file of the step 5_calling, then return warning or successfull message with the function absentefile_warning_success of the module genomics.py
 	genomic.absentefile_warning_success(expectedfile = r + '/' + '5_calling' + '/' + R1id + '.g.vcf.gz')
 
 	#calculate average depth coverage from the .dedupped.bam file
