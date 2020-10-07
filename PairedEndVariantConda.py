@@ -213,7 +213,7 @@ def main():
 		print("#### Execute %s" %cmdindexpicard)
 		os.system(cmdindexpicard)
 
-	# check the absence of the reference index files of the step 1_reference, then return warning or successfull message with the function emptydir_warning_success of the module genomics.py
+	# check the absence of the reference index files of the step 1_reference, then return warning or successfull message with the function absentefile_warning_success of the module genomics.py
 	genomic.absentefile_warning_success(expectedfile = r + '/' + '1_reference' + '/' + R1id + '.dict')
 	genomic.absentefile_warning_success(expectedfile = r + '/' + '1_reference' + '/' + R1id + '.fasta')
 	genomic.absentefile_warning_success(expectedfile = r + '/' + '1_reference' + '/' + R1id + '.fasta.amb')
@@ -230,7 +230,7 @@ def main():
 	print("#### Execute %s" %cmdBBnorm)
 	os.system(cmdBBnorm)
 
-	# check the absence of the _R1_N.fastq.gz and _R2_N.fastq.gz files of the step 2_normalization, then return warning or successfull message with the function emptydir_warning_success of the module genomics.py
+	# check the absence of the _R1_N.fastq.gz and _R2_N.fastq.gz files of the step 2_normalization, then return warning or successfull message with the function absentefile_warning_success of the module genomics.py
 	genomic.absentefile_warning_success(expectedfile = r + '/' + '2_normalization' + '/' + R1id + '_R1_N.fastq.gz')
 	genomic.absentefile_warning_success(expectedfile = r + '/' + '2_normalization' + '/' + R1id + '_R2_N.fastq.gz')
 
@@ -243,7 +243,7 @@ def main():
 	print("#### Execute %s" %cmdTrimmomatic)
 	os.system(cmdTrimmomatic)
 
-	# check the absence of _R1_P.fastq.gz and _R2_P.fastq.gz files of the step 3_trimming, then return warning or successfull message with the function genomic.absentefile_warning_success of the module genomics.py
+	# check the absence of _R1_P.fastq.gz and _R2_P.fastq.gz files of the step 3_trimming, then return warning or successfull message with the function absentefile_warning_success of the module genomics.py
 	genomic.absentefile_warning_success(expectedfile = r + '/' + '3_trimming' + '/' + R1id + '_R1_P.fastq.gz')
 	genomic.absentefile_warning_success(expectedfile = r + '/' + '3_trimming' + '/' + R1id + '_R2_P.fastq.gz')
 
