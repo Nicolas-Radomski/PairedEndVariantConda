@@ -110,6 +110,10 @@ sed -i "s@ _R2.fastq.gz@_R2.fastq.gz@" commands.lst
 ```
 sarray -p Research --cpus-per-task=48 -e %x.%N.%j.err -o %x.%N.%j.out --job-name=test-20201006 commands.lst
 ```
+### 2.4/ compile the depth and breadth coverages of multiple sets of paired-end reads
+```
+grep . /global/bio/projets/GAMeR/Nicolas-Radomski/PairedEndVariant/output/6_quality/*bam* > /global/bio/projets/GAMeR/Nicolas-Radomski/PairedEndVariant/output/6_quality/coverage.metrics
+```
 # Acknowledgment
 My old colleags Arnaud Felten and Ludovic Mallet with whom I learned a lot
 # Author
