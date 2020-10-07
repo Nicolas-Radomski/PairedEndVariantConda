@@ -38,7 +38,7 @@ conda install -c conda-forge python=3.8.5=h1103e12_9_cpython
 conda search biopython
 conda install -c conda-forge biopython=1.78=py38h1e0a361_0
 conda search gatk4
-conda install -c bioconda-forge gatk4=4.1.8.1=py38_0
+conda install -c bioconda gatk4=4.1.8.1=py38_0
 ```
 ## 2/ From available updated Conda packages
 ```
@@ -59,8 +59,8 @@ conda install -c conda-forge python
 conda update -c conda-forge python
 conda install -c conda-forge biopython
 conda update -c conda-forge biopython
-conda install -c conda-forge gatk4
-conda update -c conda-forge gatk4
+conda install -c bioconda gatk4
+conda update -c bioconda gatk4
 ```
 # Lunching of the script PairedEndVariantConda.py
 ## 1/ With a single set of paired-end reads
