@@ -36,7 +36,7 @@
 #SBATCH -o %x.%N.%j.out
 #SBATCH -e %x.%N.%j.err
 #SBATCH --cpus-per-task=48
-#SBATCH --job-name=test-20200922
+#SBATCH --job-name=test-20201006
 source /global/conda/bin/activate;conda activate PairedEndVariantCalling; \
 python /global/bio/projets/GAMeR/Nicolas-Radomski/PairedEndVariant/PairedEndVariantConda.py \
  -r VariantCalling \
