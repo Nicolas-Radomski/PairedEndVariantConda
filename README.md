@@ -112,7 +112,7 @@ sarray -p Research --cpus-per-task=48 -e %x.%N.%j.err -o %x.%N.%j.out --job-name
 ```
 ### 2.4/ compile the depth and breadth coverages of multiple sets of paired-end reads
 ```
-grep . /global/bio/projets/GAMeR/Nicolas-Radomski/PairedEndVariant/output/6_quality/*.bam.* > /global/bio/projets/GAMeR/Nicolas-Radomski/PairedEndVariant/output/6_quality/coverage.metrics
+grep . /global/bio/projets/GAMeR/Nicolas-Radomski/PairedEndVariant/VariantCalling/6_quality/*.bam.* > /global/bio/VariantCalling/GAMeR/Nicolas-Radomski/PairedEndVariant/output/6_quality/coverage.metrics
 ```
 # Acknowledgment
 My old colleags Arnaud Felten and Ludovic Mallet with whom I learned a lot
