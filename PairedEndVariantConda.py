@@ -30,7 +30,7 @@
 #### Execute cat /global/bio/projets/GAMeR/Nicolas-Radomski/PairedEndVariant/VariantCalling/6_quality/ERR3997409.bam.metrics | awk ' { print $6 } ' | tr -d "\n" | sed 's@coverage@Breadth Coverage (%) = @' > /global/bio/projets/GAMeR/Nicolas-Radomski/PairedEndVariant/VariantCalling/6_quality/ERR3997409.bam.breadth
 
 '''
-#### exemple of Bash command (sbatch_PairedEndVariantConda.sh) ####
+#### exemple of Bash command (bash_PairedEndVariantConda.sh) ####
 #!/bin/bash
 #SBATCH -p Research
 #SBATCH -o %x.%N.%j.out
