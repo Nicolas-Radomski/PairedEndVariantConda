@@ -50,11 +50,11 @@ python /global/bio/projets/GAMeR/Nicolas-Radomski/PairedEndVariant/PairedEndVari
  -trim /global/conda/envs/PairedEndAssembly/bin/trimmomatic \
  -align /global/conda/envs/PairedEndVariantCalling/bin/bwa \
  -process /global/conda/envs/PairedEndVariantCalling/bin/picard \
- -call /global/bio/projets/GAMeR/Nicolas-Radomski/PairedEndVariant \
+ -call /global/conda/envs/PairedEndVariantCalling/bin/gatk \
  -cov /global/conda/envs/PairedEndVariantCalling/bin/samtools
 
 #### exemple of Bash command execution ####
-sbatch sbatch_PairedEndVariantConda.sh
+sbatch bash_PairedEndVariantConda.sh
 '''
 
 import os, sys
