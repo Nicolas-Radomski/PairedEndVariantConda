@@ -14,7 +14,7 @@
 #- python/3.8.5/h1103e12_9_cpython/conda-forge
 #- biopython/1.78/py38h1e0a361_0/conda-forge
 #- gatk4/4.1.8.1/py38_0/bioconda
-# the present main script PairedEndAssemblyVariant.py executes more presisly the commands below
+# the present main script PairedEndAssemblyVariant.py executes more precisly the commands below
 #### Execute /global/conda/envs/PairedEndVariantCalling/bin/bwa index -a is /global/bio/projets/GAMeR/Nicolas-Radomski/PairedEndVariant/VariantCalling/1_reference/Enteritidis_P125109.fasta
 #### Execute /global/conda/envs/PairedEndVariantCalling/bin/samtools faidx /global/bio/projets/GAMeR/Nicolas-Radomski/PairedEndVariant/VariantCalling/1_reference/Enteritidis_P125109.fasta
 #### Execute /global/conda/envs/PairedEndVariantCalling/bin/picard CreateSequenceDictionary REFERENCE=/global/bio/projets/GAMeR/Nicolas-Radomski/PairedEndVariant/VariantCalling/1_reference/Enteritidis_P125109.fasta OUTPUT=/global/bio/projets/GAMeR/Nicolas-Radomski/PairedEndVariant/VariantCalling/1_reference/Enteritidis_P125109.dict
