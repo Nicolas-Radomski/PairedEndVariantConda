@@ -21,14 +21,14 @@ from Bio import SeqIO
 def congratulation():
 	print('#### Congratulation .... The workflow finished successfully ... Thank you for your trust')
 
-# function creating a directory if it does not exist or returning a warning message and exiting from the systhem if it exists
-def nodir_makedir_warning_exit(directory):
+# function creating a directory if it does not exist or returning an error message and exiting from the systhem if it exists
+def nodir_makedir_error(directory):
 	if not os.path.exists(directory):
 		os.mkdir(directory)
 		print("#### The directory %s is successfully created" %directory)
 	else:    
-		print("#### WARNING: The directory %s already exists and should be removed of renamed" %directory)
-		sys.exit("#### Please, remove or rename the directory %s before to recall the script" %directory)
+		print("#### ERROR: The directory %s already exists and should be removed of renamed" %directory)
+		sys.exit("#### ERROR: Please, remove or rename the directory %s before to recall the script" %directory)
 
 # function creating a directory if it does not exist or returning a warning message if it exists
 def nodir_makedir_warning(directory):
@@ -38,11 +38,11 @@ def nodir_makedir_warning(directory):
 	else:    
 		print("#### WARNING: The directory %s already exists" %directory)
 
-# function returning an warning message and exiting from the systhem if a directory is emptyness (e.g. usually a failed previous step of the workflow), or a successfull message if this last is full
-def emptydir_warning_success(directory):
+# function returning an error message and exiting from the systhem if a directory is emptyness (e.g. usually a failed previous step of the workflow), or a successfull message if this last is full
+def emptydir_error_success(directory):
 	if len(os.listdir(directory)) == 0:
-		print("#### WARNING: Results are not produced in %s" %directory)
-		sys.exit("#### Please, remove or rename the directory %s, then check standard error (stderr.log) and output (stdout.log) before lunching" %directory)
+		print("#### ERROR: Results are not produced in %s" %directory)
+		sys.exit("#### ERROR: Please, check standard error (stderr.log) and output (stdout.log) before to recall the script" %directory)
 	else:
 		wd = os.getcwd()
 		output = wd + '/' + directory
@@ -52,6 +52,16 @@ def emptydir_warning_success(directory):
 def absentefile_warning_success(expectedfile):
 	if os.path.exists(expectedfile) is False:
 		print("#### WARNING: The expected file does not exist in %s" %expectedfile)
+	else:
+		wd = os.getcwd()
+		output = wd + '/' + expectedfile
+		print("#### The expected file is successfully produced in {} and can be found in {}" .format(expectedfile, output))
+
+# function returning an error message from the systhem and exiting if a file does not exist (e.g. usually a failed previous step of the workflow), or a successfull message if this last exist
+def absentefile_error_success(expectedfile):
+	if os.path.exists(expectedfile) is False:
+		print("#### ERROR: The expected file does not exist in %s" %expectedfile)
+		sys.exit("#### ERROR: Please, check standard error (stderr.log) and output (stdout.log) before to recall the script" %directory)
 	else:
 		wd = os.getcwd()
 		output = wd + '/' + expectedfile
