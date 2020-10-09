@@ -92,6 +92,10 @@ python /global/bio/projets/GAMeR/Nicolas-Radomski/PairedEndVariant/PairedEndVari
 ```
 sbatch bash_PairedEndVariantConda.sh
 ```
+### 1.3/ compile the depth and breadth coverages from mapping
+```
+grep . /global/bio/projets/GAMeR/Nicolas-Radomski/PairedEndVariant/VariantCalling/6_quality/*.bam.* > /global/bio/projets/GAMeR/Nicolas-Radomski/PairedEndVariant/VariantCalling/6_quality/coverage.metrics
+```
 ## 2/ With multiple sets of paired-end reads
 ### 2.1/ creat a file list_of_IDs.lst including a list of ID samples to process
 ```
@@ -110,7 +114,7 @@ sed -i "s@ _R2.fastq.gz@_R2.fastq.gz@" commands.lst
 ```
 sarray -p Research --cpus-per-task=48 -e %x.%N.%j.err -o %x.%N.%j.out --job-name=test-20201006 commands.lst
 ```
-### 2.4/ compile the depth and breadth coverages of multiple sets of paired-end reads
+### 2.4/ compile the depth and breadth coverages from mapping
 ```
 grep . /global/bio/projets/GAMeR/Nicolas-Radomski/PairedEndVariant/VariantCalling/6_quality/*.bam.* > /global/bio/projets/GAMeR/Nicolas-Radomski/PairedEndVariant/VariantCalling/6_quality/coverage.metrics
 ```
