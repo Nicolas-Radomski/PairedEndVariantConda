@@ -1,6 +1,6 @@
 # Usage
 The main Python script PairedEndVariantConda.py aims at performing variant calling analysis of bacterial genomes from a Python module genomic.py and a Conda environment PairedEndVariantCalling.
-- This workflow run reference indexing for BWA/Picard/Samtools (step 1_reference), BBnorn (step 2_normalization), Trimmomatic (step 3_trimming), BWA and Picard (4_mapping), GATK4 (5_calling) and quality assessment of mapping with Samtools (6_quality) based on paired-end reads from a single genomic sample, successively.
+- This workflow run reference indexing for BWA/Picard/Samtools (step 1_reference), BBnorn (step 2_normalization), Trimmomatic (step 3_trimming), BWA and Picard (step 4_mapping), GATK4 (step 5_calling) and quality assessment of mapping with Samtools (step 6_quality) based on paired-end reads from a single genomic sample, successively.
 - The main script PairedEndVariantConda.py and module genomic.py (version 20201006, October 2020) were prepared and tested with Python and dependencies below.
 - The module genomic.py has to be with the present main script PairedEndVariantConda.py to lunch it properly.
 - The Conda environment PairedEndVariantCalling has to be prepared as presented below.
