@@ -2,7 +2,7 @@
 The main Python script PairedEndVariantConda.py aims at performing variant calling analysis of bacterial genomes from a Python module genomic.py and a Conda environment PairedEndVariantCalling.
 - This workflow run reference indexing for BWA/Picard/Samtools (step 1_reference), BBnorn (step 2_normalization), Trimmomatic (step 3_trimming), BWA and Picard (step 4_mapping), GATK4 (step 5_calling) and quality assessment of mapping with Samtools (step 6_quality) based on paired-end reads from a single genomic sample, successively.
 - The main script PairedEndVariantConda.py and module genomic.py (version 20201006, October 2020) were prepared and tested with Python and dependencies below.
-- The module genomic.py has to be with the present main script PairedEndVariantConda.py to lunch it properly.
+- The module genomic.py has to be with the present main script PairedEndVariantConda.py to launch it properly.
 - The Conda environment PairedEndVariantCalling has to be prepared as presented below.
 - The user can setup his own dependencies in his own bin.
 - The paired-end reads must be named ID_R1.fastq.gz and ID_R2.fastq.gz for forward and reverse reads, respectively (ID means sample identifier).
@@ -62,7 +62,7 @@ conda update -c conda-forge biopython
 conda install -c bioconda gatk4
 conda update -c bioconda gatk4
 ```
-# Lunching of the script PairedEndVariantConda.py
+# Launching of the script PairedEndVariantConda.py
 ## 1/ With a single set of paired-end reads
 ### 1.1/ prepare a single command in a Bash script (bash_PairedEndVariantConda.sh)
 ```
@@ -97,7 +97,7 @@ sbatch bash_PairedEndVariantConda.sh
 grep . /global/bio/projets/GAMeR/Nicolas-Radomski/PairedEndVariant/VariantCalling/6_quality/*.bam.* > /global/bio/projets/GAMeR/Nicolas-Radomski/PairedEndVariant/VariantCalling/6_quality/coverage.metrics
 ```
 ## 2/ With multiple sets of paired-end reads
-### 2.1/ creat a file list_of_IDs.lst including a list of ID samples to process
+### 2.1/ creat a file list_of_IDs.lst including a list of ID samples to process (one ID per line with \n)
 ```
 gedit list_of_IDs.lst
 ```
