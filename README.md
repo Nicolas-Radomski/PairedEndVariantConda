@@ -6,6 +6,8 @@ The main Python script PairedEndVariantConda.py aims at performing variant calli
 - The Conda environment PairedEndVariantCalling has to be prepared as presented below.
 - The user can setup his own dependencies in his own bin.
 - The paired-end reads must be named ID_R1.fastq.gz and ID_R2.fastq.gz for forward and reverse reads, respectively (ID means sample identifier).
+- The IDs have to include a maximum of 16 alphanumeric characters (AZ, az , 09) and only the underscore (_) is accepted in the IDs.
+- The accents (‘, ¨, ^), space ( ), hyphen (-), and special characters (/, \, », (, }, =, +, @) are not accepted in the IDs.
 - The quality scores paired-end reads must be encoded with Phred33.
 # Dependencies
 The main script PairedEndVariantConda.py and module genomic.py (version 20201006) were prepared and tested with Conda packages below (Name/Version/Build/Channel).
