@@ -172,7 +172,7 @@ def main():
 	# check IDs identity, then prepare output directories and run reference indexing
 	if R1id != R2id:
 		print("#### The forward (ID_R1.fastq.gz) and reverse (ID_R2.fastq.gz) reads do not match")
-		sys.exit("#### Please, check the format of the paired-end reads in {} and R2 in {}".format(R1, R2))
+		sys.exit("#### Please, check the format of the paired-end reads in R1 {} and R2 in {}".format(R1, R2))
 	else:
 		print("#### The forward (ID_R1.fastq.gz) and reverse (ID_R2.fastq.gz) reads match")
 		# create an output directory called by the run name if it does not exist with the function nodir_makedir_warning of the module genomic.py
