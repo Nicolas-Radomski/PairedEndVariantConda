@@ -120,6 +120,8 @@ sarray -p Research --cpus-per-task=48 -e %x.%N.%j.err -o %x.%N.%j.out --job-name
 ```
 grep . /global/bio/projets/GAMeR/Nicolas-Radomski/PairedEndVariant/VariantCalling/6_quality/*.bam.* > /global/bio/projets/GAMeR/Nicolas-Radomski/PairedEndVariant/VariantCalling/6_quality/coverage.metrics
 ```
+# Illustration
+![Workflow](https://github.com/Nicolas-Radomski/PairedEndVariantConda/blob/main/illustration.png)
 # Acknowledgment
 My old colleagues Arnaud Felten and Ludovic Mallet with whom I learned a lot about Python
 # Author
